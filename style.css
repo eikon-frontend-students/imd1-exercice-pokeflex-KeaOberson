@@ -29,3 +29,86 @@
  * Bon courage ! 🎨
  * =====================================================
  */
+* {
+  box-sizing: border-box;
+  margin: 0%;
+}
+body {
+  background-color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 50px;
+}
+
+.header-flex {
+  display: flex;
+  justify-content: center;
+}
+.header-title {
+  font-size: 60px;
+  font-family: Racing sans one;
+}
+
+.search-flex {
+  display: flex;
+  justify-content: center;
+}
+/*card*/
+.card-flex {
+  background-color: white;
+  padding: 20px;
+  /*ombre*/
+  border-radius: 50px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow:
+    20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
+  /*flex*/
+  display: flex;
+  max-width: 300px;
+  flex-direction: column;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.card-info-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.card-name {
+  display: flex;
+  justify-content: center;
+  font-family: Racing sans one;
+}
+
+.card-types-flex {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.type-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  background-color: #eee;
+}
+.card-stats-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.stat-row-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
