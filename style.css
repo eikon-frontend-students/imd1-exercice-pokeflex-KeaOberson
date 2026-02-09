@@ -42,31 +42,86 @@ body {
 .header-flex {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
+
 .header-title {
-  font-size: 60px;
-  font-family: Racing sans one;
+  font-size: 100px;
+  font-family: "Racing Sans One", sans-serif;
+  text-align: center;
 }
 
 .search-flex {
   display: flex;
   justify-content: center;
 }
+
+/* c'est le conteneur des cartes*/
+.cards-flex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 /*card*/
 .card-flex {
-  background-color: white;
   padding: 20px;
-  /*ombre*/
   border-radius: 50px;
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
   box-shadow:
     20px 20px 60px #d9d9d9,
     -20px -20px 60px #ffffff;
-  /*flex*/
   display: flex;
   max-width: 300px;
   flex-direction: column;
+
+  /* transitions */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative; /* pour le pseudo-élément */
 }
+
+/* Hover : grossit et ombre */
+.card-flex:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow:
+    25px 25px 70px #d9d9d9,
+    -25px -25px 70px #ffffff;
+  cursor: pointer;
+}
+
+/* Arc-en-ciel subtil derrière le contenu */
+.card-flex::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    145deg,
+    #ffe6f0 0%,
+    #e6f0ff 20%,
+    #fff5e6 40%,
+    #e6fff7 60%,
+    #fff0e6 80%,
+    #f0e6ff 100%
+  );
+  opacity: 0; /* invisible par défaut */
+  pointer-events: none;
+  border-radius: 50px;
+  transition: opacity 0.5s ease;
+  z-index: -1; /* derrière tout */
+}
+
+/* Hover : apparition de l’arc-en-ciel */
+.card-flex:hover::before {
+  opacity: 0.6; /* plus visible */
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -75,19 +130,46 @@ img {
 .card-info-flex {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 5px;
 }
 .card-name {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   font-family: Racing sans one;
 }
 
+/*toute cette partie la c'est pour aligner le numéro et la génératon sur la meme ligne */
+.card-id,
+.card-generation {
+  display: flex;
+  gap: 4px; /* espace entre label et valeur */
+}
+
+/* Le parent devient une ligne flex */
+.card-info-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* On met ID et Génération côte à côte */
+.card-id {
+  align-self: flex-start;
+}
+
+.card-generation {
+  align-self: flex-end;
+  margin-top: -22px; /* remonte sur la même ligne que l'id */
+}
+/*toute cette partie la c'est pour aligner le numéro et la génératon sur la meme ligne */
+
 .card-types-flex {
   display: flex;
-  justify-content: center;
+  /* si j'ai envie de finalement mettre l'element au milieu je met center*/
+  justify-content: flex-start;
   gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 .type-badge {
@@ -111,4 +193,77 @@ img {
   padding: 6px 10px;
   border-radius: 10px;
   font-size: 13px;
+}
+
+.main-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  width: 100%;
+}
+
+.search-flex {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.search-form-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  padding: 20px 25px;
+  border-radius: 50px;
+  box-shadow:
+    10px 10px 20px #d9d9d9,
+    -10px -10px 20px #ffffff;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-input-flex {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(145deg, #f0f0f0, #ffffff);
+  box-shadow:
+    inset 5px 5px 10px #d9d9d9,
+    inset -5px -5px 10px #ffffff;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.search-button {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow:
+    5px 5px 10px #d9d9d9,
+    -5px -5px 10px #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  transition: 0.2s;
+}
+
+.search-button:hover {
+  box-shadow:
+    inset 5px 5px 10px #d9d9d9,
+    inset -5px -5px 10px #ffffff;
 }
