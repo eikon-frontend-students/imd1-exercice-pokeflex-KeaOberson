@@ -67,6 +67,39 @@
     if (DEFAULT_POKEMON && DEFAULT_POKEMON.trim()) {
       loadDefaultPokemon(DEFAULT_POKEMON.trim());
     }
+
+    // =====================================================
+    // BOUTON POKÉMON SURPRISE 🔴 AJOUT
+    // =====================================================
+    const surpriseButton =
+      document.getElementById("surprise-button"); /* 🔴 AJOUT */
+    if (surpriseButton) {
+      /* 🔴 AJOUT */
+      surpriseButton.addEventListener("click", async () => {
+        /* 🔴 AJOUT */
+        try {
+          /* 🔴 AJOUT */
+          hideError(); /* cacher l'erreur si elle est visible 🔴 AJOUT */
+
+          // Générer un ID aléatoire entre 1 et 1010 🔴 AJOUT
+          const randomId = Math.floor(Math.random() * 1010) + 1; /* 🔴 AJOUT */
+
+          // Récupérer le Pokémon via l'API 🔴 AJOUT
+          const response = await fetch(
+            `${API_BASE_URL}${randomId}`,
+          ); /* 🔴 AJOUT */
+          if (!response.ok)
+            throw new Error("Impossible de charger le Pokémon."); /* 🔴 AJOUT */
+          const pokemon = await response.json(); /* 🔴 AJOUT */
+
+          // Afficher la carte 🔴 AJOUT
+          createPokemonCard(pokemon); /* 🔴 AJOUT */
+        } catch (error) {
+          /* 🔴 AJOUT */
+          showError(error.message); /* 🔴 AJOUT */
+        } /* 🔴 AJOUT */
+      }); /* 🔴 AJOUT */
+    } /* 🔴 AJOUT */
   });
 
   /**
@@ -250,11 +283,9 @@
     const generationEl = card.querySelector('[data-field="generation"]');
     if (generationEl) {
       let gen = pokemon.apiGeneration || pokemon.generation || "—";
-      // Si c'est un nombre, on l'affiche directement
       if (typeof gen === "number") {
         generationEl.textContent = gen;
       } else if (typeof gen === "string") {
-        // Parfois l'API retourne "1ère génération" etc.
         generationEl.textContent = gen;
       } else {
         generationEl.textContent = "—";
@@ -264,13 +295,8 @@
     // Types
     const typesContainer = card.querySelector('[data-field="types-container"]');
     if (typesContainer) {
-      // Récupère les types depuis apiTypes ou types
       const types = extractTypes(pokemon);
-
-      // Vide le conteneur des types (enlève les exemples du template)
       typesContainer.innerHTML = "";
-
-      // Crée un badge pour chaque type
       types.forEach(function (typeName) {
         const badge = document.createElement("span");
         badge.className = "type-badge";
@@ -304,43 +330,26 @@
     cardsContainer.appendChild(card);
   }
 
-  /**
-   * Extrait les noms des types depuis les données du Pokémon
-   * @param {Object} pokemon - Les données du Pokémon
-   * @returns {string[]} Un tableau des noms de types
-   */
   function extractTypes(pokemon) {
-    // Essaie apiTypes d'abord (structure: [{name: "Feu", image: "..."}])
     if (pokemon.apiTypes && Array.isArray(pokemon.apiTypes)) {
       return pokemon.apiTypes.map(function (t) {
         return t.name || "Type";
       });
     }
-
-    // Sinon essaie types
     if (pokemon.types && Array.isArray(pokemon.types)) {
       return pokemon.types.map(function (t) {
-        // Si c'est un objet avec name
         if (typeof t === "object" && t.name) {
           return t.name;
         }
-        // Si c'est directement une string
         if (typeof t === "string") {
           return t;
         }
         return "Type";
       });
     }
-
-    // Aucun type trouvé
     return ["—"];
   }
 
-  /**
-   * Extrait les statistiques depuis les données du Pokémon
-   * @param {Object} pokemon - Les données du Pokémon
-   * @returns {Object} Les statistiques formatées
-   */
   function extractStats(pokemon) {
     const defaultStats = {
       hp: "—",
@@ -350,15 +359,8 @@
       specialDefense: "—",
       speed: "—",
     };
-
-    // Si pas de stats, retourne les valeurs par défaut
-    if (!pokemon.stats) {
-      return defaultStats;
-    }
-
+    if (!pokemon.stats) return defaultStats;
     const s = pokemon.stats;
-
-    // Mapping des différentes structures possibles de l'API
     return {
       hp: s.HP != null ? s.HP : s.hp != null ? s.hp : "—",
       attack: s.attack != null ? s.attack : s.Attack != null ? s.Attack : "—",
@@ -384,18 +386,11 @@
     };
   }
 
-  /**
-   * Affiche un message d'erreur
-   * @param {string} message - Le message à afficher
-   */
   function showError(message) {
     errorMessage.textContent = message;
     errorMessage.removeAttribute("hidden");
   }
 
-  /**
-   * Cache le message d'erreur
-   */
   function hideError() {
     errorMessage.textContent = "";
     errorMessage.setAttribute("hidden", "");
