@@ -328,6 +328,11 @@
 
     // Ajoute la carte au conteneur
     cardsContainer.appendChild(card);
+    // **🔴 Ajouté : cache le placeholder Pokéball et le texte**
+    const placeholder = document.getElementById("pokedex-placeholder");
+    if (placeholder) {
+      placeholder.style.display = "none";
+    }
   }
 
   function extractTypes(pokemon) {
