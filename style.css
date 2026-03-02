@@ -53,11 +53,10 @@ body {
 
 .search-flex {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
-/* c'est le conteneur des cartes*/
-.cards-flex {
+.cards-flex /* c'est le conteneur des cartes*/ {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -76,12 +75,12 @@ body {
   max-width: 300px;
   flex-direction: column;
 
-  /* transitions */
+  /* transitions quand on hover la carte */
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
   overflow: hidden;
-  position: relative; /* pour le pseudo-élément */
+  position: relative;
 }
 
 /* Hover : grossit et ombre */
@@ -93,7 +92,7 @@ body {
   cursor: pointer;
 }
 
-/* Arc-en-ciel subtil derrière le contenu */
+/* Arc-en-ciel sur la carte quand on hover */
 .card-flex::before {
   content: "";
   position: absolute;
@@ -119,7 +118,7 @@ body {
 
 /* Hover : apparition de l’arc-en-ciel */
 .card-flex:hover::before {
-  opacity: 20; /* plus visible */
+  opacity: 20; /* il devient visible */
 }
 
 img {
@@ -130,7 +129,6 @@ img {
 .card-info-flex {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 5px;
 }
 .card-name {
@@ -145,13 +143,6 @@ img {
   gap: 4px; /* espace entre label et valeur */
 }
 
-.card-info-flex {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/*  met ID et Génération côte à côte */
 .card-id {
   align-self: flex-start;
 }
@@ -160,15 +151,12 @@ img {
   align-self: flex-end;
   margin-top: -22px; /*  pour que ça remonte sur la même ligne que l'id */
 }
-/*toute cette partie la c'est pour aligner le numéro et la génératon sur la meme ligne */
+/*fin de la partie pour aligner le numéro et la génératon sur la meme ligne */
 
 .card-types-flex {
   display: flex;
-  /* si j'ai envie de finalement mettre l'element au milieu je met center*/
-  justify-content: flex-start;
   gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
   flex-wrap: wrap;
 }
 .type-badge {
@@ -200,14 +188,6 @@ img {
   align-items: center;
   gap: 30px;
   padding: 20px;
-  width: 100%;
-}
-
-.search-flex {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .search-form-flex {
@@ -244,7 +224,7 @@ img {
   color: #333;
 }
 
-.search-input::placeholder {
+.search-input::placeholder /*couleur du texte dans la barre de recherche*/ {
   color: #aaa;
 }
 
@@ -269,8 +249,7 @@ img {
 }
 
 .surprise-button {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
   padding: 10px 20px;
   border-radius: 25px;
   border: none;
@@ -293,9 +272,10 @@ img {
 }
 
 .error-message {
-  margin-top: 40px;
   color: red;
   font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
 }
 #pokedex-placeholder {
   display: flex;
