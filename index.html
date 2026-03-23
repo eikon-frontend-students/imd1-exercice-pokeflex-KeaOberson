@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PokéFlex - Exercice Flexbox</title>
     <link rel="stylesheet" href="style.css" />
+
+    <!--font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!--
@@ -42,6 +50,15 @@
               required
             />
             <button type="submit" class="search-button">Chercher</button>
+            <div class="surprise-container">
+              <button
+                type="button"
+                id="surprise-button"
+                class="surprise-button"
+              >
+                Pokémon surprise 🎲
+              </button>
+            </div>
           </div>
           <p class="search-helper">Ex: Gruikui, Pikachu, Salamèche</p>
         </form>
@@ -53,6 +70,11 @@
       </section>
 
       <!-- ===== CONTENEUR DES CARTES ===== -->
+
+      <div id="pokedex-placeholder">
+        <img src="assets/pokeball.jpeg" alt="Pokeball" />
+        <p>Cherche ton Pokémon préféré pour commencer !</p>
+      </div>
       <section class="cards-section">
         <div class="cards-container cards-flex" id="cards-container">
           <!-- Les cartes Pokémon seront ajoutées ici par JavaScript -->
@@ -129,7 +151,8 @@
         </div>
       </article>
     </template>
-
+    <script src="pokebuildapi-pokeapi-shim.js"></script>
+    <script src="app.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
